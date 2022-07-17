@@ -1,0 +1,40 @@
+<div class="header-container">
+    <div class="right-container">
+
+        <div class="logout-container">
+            <button mat-raised-button class="logout" (click)="logout()">Logout</button>
+        </div>
+        
+        <div class='name-container'>
+            <h2 (click)="goToEditProfile()" class="name">
+                {{userName}}
+            </h2>
+        </div>
+    </div>
+
+    <div class="center-container">
+        <div class="main-container">
+            <h1 class="main">
+                Main name
+            </h1>
+        </div>
+    </div>
+
+    <div class="left-container">
+        <div class="dashboard-container">
+            <button [ngClass]="isDashboardActive ? 'dashboardActive' : ''"  mat-raised-button (click)="goToDashboard()" class="dashboard">
+                Dashboard
+            </button>
+        </div>
+        <div class="accounts-container">
+            <button [ngClass]="isAccountsActive ? 'accountsActive' : ''" mat-raised-button (click)="goToAccounts()" class="accounts">
+                Accounts
+            </button >
+        </div>
+        <div class="transfers-container">
+            <button mat-raised-button class="transfers">
+                Transfers
+            </button>
+        </div>
+    </div>
+</div>

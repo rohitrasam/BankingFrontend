@@ -1,0 +1,129 @@
+@mixin text-container {
+    padding-right: 30px;
+    margin: 0px;
+    color: #1e90ff;
+}
+
+$glow: rgb(63, 183, 20);
+
+@mixin onHover($colour) {
+    background-color: $colour;
+    box-shadow: 0 0 20px $colour;
+}
+
+@mixin isActive {
+    background-color: $glow;
+    // box-shadow: 0 0 20px $glow;
+    }
+
+@mixin buttons{
+    background-color: crimson;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row-reverse;
+    width:100%;
+    justify-content: space-between;
+    background-color: #2f4f4f;
+
+    .right-container{
+        display: flex;
+        flex-direction: row-reverse;
+        width: 50%;
+        padding: 1%;
+        .name-container{
+            @include text-container();
+    
+            .name{
+                margin: 0px;
+                &:hover {
+                    font-size: 22px;
+                    cursor: pointer;
+                }
+            }
+        }
+    
+        .logout-container{            
+            .logout{
+                background-color: dodgerblue;
+                animation: cubic-bezier(1, 0, 0, 1);
+                &:hover{
+                    @include onHover(crimson)
+                }
+            }
+        }
+    }
+
+    .center-container{
+        padding: 1%;
+        width: 50%;
+        
+        .main-container{
+            @include text-container();
+            text-align: center;
+
+            .main{
+                margin: 0px;
+                font-family: monospace;
+                font-weight: 700;
+                font-size: 30px;
+                &:hover{
+                    font-size: 32px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+
+    .left-container{
+        display: flex;
+        flex-direction: row;
+        padding: 1%;
+        width: 50%;
+
+        .dashboard-container{
+            @include text-container();
+            .dashboard{
+                @include buttons();
+                &:hover{
+                    @include onHover(crimson);
+                }
+            }
+            .dashboardActive {
+                @include isActive();
+                &:hover{
+                    @include onHover($glow);
+                }
+            }
+        }
+
+        .accounts-container{
+            @include text-container();
+            .accounts{
+                @include buttons();
+                &:hover{
+                    @include onHover(crimson);    
+                }
+            }
+            .accountsActive {
+                @include isActive();
+                &:hover{
+                    @include onHover($glow);
+                }
+            }
+        }
+
+        .transfers-container{
+            @include text-container();
+            .transfers{
+                @include buttons();
+                &:hover{
+                    @include onHover(crimson)
+                }
+            }
+        }
+    }
+    
+}
