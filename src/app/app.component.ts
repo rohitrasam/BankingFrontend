@@ -7,6 +7,7 @@ import { Router, TitleStrategy } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  simple = "Hello"
   title = 'BankingFrontend';
 
   constructor(public router: Router) {}
