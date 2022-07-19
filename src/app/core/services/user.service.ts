@@ -4,22 +4,29 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/IUser';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
+// @Injectable({
+//   providedIn: 'root'
+// })
 export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  url = environment.baseUrl
+  private url = environment.baseUrl
 
-  user_login(data: any): Observable<IUser>{
+  userLogin(data: any): Observable<IUser>{
 
     return this.http.post<IUser>(`${this.url}login/`, data)
   }
 
-  get_user(id: number): Observable<IUser> {
+  getUser(id: number): Observable<IUser> {
 
     return this.http.get<IUser>(`${this.url}get_user/${id}/`)
+  }
+
+  updateUser(user: IUser): Observable<string>{
+    
+    return this.http.patch<string>(`${this.url}update_user/${user.id}`, user)
   }
 }

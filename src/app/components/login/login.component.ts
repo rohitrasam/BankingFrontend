@@ -24,7 +24,11 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.initialzeLogin()
+    
+  }
 
+  initialzeLogin() {
     this.loginForm = this.formBuilder.group(
       {
         email: ['', Validators.required],
@@ -33,22 +37,24 @@ export class LoginComponent implements OnInit {
     )
   }
 
+
+  goToRegister(){
+    this.route.navigate(['register'])
+  }
+
   onSubmit(){
     let email = this.loginForm.value.email
     let password = this.loginForm.value.password
-    this.loginService.user_login({'email': email, 'password': password}).subscribe(data => {      
+    this.loginService.userLogin({'email': email, 'password': password}).subscribe(data => {      
       localStorage.setItem('data', String(data.id))
       this.authService.setToken(""+Math.random() * 1000 + 987987)
       this.route.navigate(['dashboard'])
     }, err => {
-      if(err.status === 500){
-        alert("Invalid email")
-      }
-      else{
         alert(err.error)
-      }
-      
     })
   }
 
 }
+
+
+

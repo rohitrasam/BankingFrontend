@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserService } from './core/services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,7 @@ import { EditprofileComponent } from './components/editprofile/editprofile.compo
     HeaderComponent,
     AccountsComponent,
     EditprofileComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { EditprofileComponent } from './components/editprofile/editprofile.compo
     MatInputModule,
     MatFormFieldModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,13 +1,19 @@
-@mixin labels {
-    // label{
-        color: crimson;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-    // }
+// @mixin labels {
+//     // label{
+//         color: crimson;
+//         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+//         font-size: 15px;
+//         font-weight: bold;
+//     // }
+// }
+@mixin onHover($onHover, $textColor) {
+    &:hover{
+        color: $textColor;
+        background-color:$onHover;
+        box-shadow: 0 0 25px $onHover;
+    }
 }
-
-$onHover: rgb(63, 183, 20);
+$boxShadow: whitesmoke;
 
 body {
     display: flex;
@@ -23,11 +29,11 @@ body {
         border: 2px solid gainsboro;
 
         &:hover{
-            padding: 50px;    
-            box-shadow: 10px 10px 10px whitesmoke, 
-            10px 10px 10px whitesmoke, 
-            10px 10px 10px whitesmoke, 
-            10px 10px 10px whitesmoke, 
+            transform: translateY(-3px);
+            box-shadow: 10px 10px 10px $boxShadow, 
+            10px 10px 10px $boxShadow, 
+            10px 10px 10px $boxShadow, 
+            10px 10px 10px $boxShadow, 
             ;
         }
     }
@@ -46,50 +52,49 @@ body {
             flex-direction: column;
             justify-content: center;
             width: 100%;
-            .email-container{
-                mat-label{
-                    @include labels()
-                }
-            }
+
+            // .email-container{
+            //     mat-label{
+            //         @include labels()
+            //     }
+            // }
             
-            .password-container {
-                mat-label{
+            // .password-container {
+            //     mat-label{
                     
-                    @include labels()
-                }
-            }
-            
-            .mat-input-element{
-                color: aliceblue;
-                caret-color: gainsboro;
+            //         @include labels()
+            //     }
+            // }
                 
-            }
-            
-            
-            
         }
     }
     
     .button-container{
-        button{
-            background-color: dodgerblue;
-            // border: 2px solid dodgerblue;
-            &:hover{
-                background-color:$onHover;
-                // border: 2px solid rgb(127, 223, 255);
-                box-shadow: 0 0 25px $onHover;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        // .login-button-container{
+            .login-button{
+
+                background-color: dodgerblue;;
+                @include onHover(rgb(63, 183, 20), aliceblue);
             }
-        }
+
+            .register-button{
+                background-color: dodgerblue;
+                @include onHover(rgb(255, 183, 20), black)
+            }
+        // }
     }
     
 }
 
-:host ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
-    background-color: whitesmoke;
-}
-:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline
-{
-    background-color: dodgerblue;
-}
+// :host ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+//     background-color: whitesmoke;
+// }
+// :host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline
+// {
+//     background-color: dodgerblue;
+// }
 
 

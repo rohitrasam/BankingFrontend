@@ -7,5 +7,6 @@ export class User implements IUser {
     ph_no!: string
     city!: string
     state!: string
+    password!: string
 
 }

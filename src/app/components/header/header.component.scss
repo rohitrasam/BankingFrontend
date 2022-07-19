@@ -1,19 +1,23 @@
+$glow: rgb(63, 183, 20);
+
 @mixin text-container {
     padding-right: 30px;
     margin: 0px;
     color: #1e90ff;
 }
 
-$glow: rgb(63, 183, 20);
 
 @mixin onHover($colour) {
     background-color: $colour;
     box-shadow: 0 0 20px $colour;
+    // box-shadow: 4px 3px 11px 6px $colour; 
+    transform: translateY(-3px);
 }
 
 @mixin isActive {
     background-color: $glow;
-    // box-shadow: 0 0 20px $glow;
+    transition-duration: 0.3s;
+    // box-shadow: 1px 1px 20px $glow;
     }
 
 @mixin buttons{
@@ -25,7 +29,7 @@ $glow: rgb(63, 183, 20);
     flex-direction: row-reverse;
     width:100%;
     justify-content: space-between;
-    background-color: #2f4f4f;
+    background-color: #1a5858;
 
     .right-container{
         display: flex;
@@ -64,9 +68,10 @@ $glow: rgb(63, 183, 20);
             text-align: center;
 
             .main{
-                margin: 0px;
+                margin: 0 0 0 155px;
                 font-family: monospace;
                 font-weight: 700;
+                width: fit-content;
                 font-size: 30px;
                 &:hover{
                     font-size: 32px;
