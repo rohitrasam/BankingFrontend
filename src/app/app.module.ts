@@ -13,8 +13,9 @@ import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
-import { RegisterComponent } from './components/register/register.component';
 import { UserService } from './core/services/user.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatCardModule } from '@angular/material/card'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,7 @@ import { UserService } from './core/services/user.service';
     HeaderComponent,
     AccountsComponent,
     EditprofileComponent,
-    RegisterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,9 @@ import { UserService } from './core/services/user.service';
     HttpClientModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FontAwesomeModule,
+    MatCardModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

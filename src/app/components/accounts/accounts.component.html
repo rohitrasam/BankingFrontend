@@ -1,3 +1,20 @@
 <body>
-    <p>accounts works!</p>
+    <div *ngIf="error">
+        <h1>
+            {{error}}
+        </h1>
+    </div>
+    <div *ngFor="let account of accounts">
+        <mat-card>
+            <div class="account-type-container">
+                <mat-card-title>{{account.account_type}}</mat-card-title>
+            </div>
+            <div class="account-no-container">
+                <mat-card-subtitle>
+                    A/c no: {{account.account_no}}
+                </mat-card-subtitle>
+            </div>
+        </mat-card>
+
+    </div>
 </body>

@@ -4,14 +4,21 @@ import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/core/interfaces/IUser';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { faBank, faMoneyBillTransfer, faGauge, faReceipt, faArrowRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-
+export class HeaderComponent implements OnInit {
+  userIcon = faUser
+  userId = Number(localStorage.getItem('data'))
+  logoutIcon = faArrowRightFromBracket
+  dashboardIcon = faGauge
+  accountsIcon= faReceipt
+  transferIcon = faMoneyBillTransfer
+  bankIcon = faBank;
   userName!: string
   isAccountsActive!: boolean
   isDashboardActive!: boolean
@@ -29,16 +36,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    if(this.route.url === '/accounts'){
+    if(this.route.url.includes('/accounts')){
       this.isDashboardActive = false
       this.isAccountsActive = true
     }
-    else if(this.route.url === '/dashboard'){
+    else if(this.route.url.includes('/dashboard')){
       this.isDashboardActive = true
       this.isAccountsActive = false
     }
         
-    this.userSubscription = this.userService.getUser(Number(localStorage.getItem('data'))).subscribe(data => {
+    this.userSubscription = this.userService.getUser(this.userId).subscribe(data => {
       this.userName = data['name']
 
     })
@@ -57,7 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   goToAccounts() {
-    this.route.navigate(['accounts'])
+    this.route.navigate(['accounts'], {queryParams : {id : this.userId}})
     this.isDashboardActive = false
     this.isAccountsActive = true
   }

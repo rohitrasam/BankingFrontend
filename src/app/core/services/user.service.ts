@@ -29,4 +29,8 @@ export class UserService {
     
     return this.http.patch<string>(`${this.url}update_user/${user.id}`, user)
   }
+
+  createUser(user: IUser): Observable<string>{
+    return this.http.post<string>(`${this.url}create_user/`, user)
+  }
 }

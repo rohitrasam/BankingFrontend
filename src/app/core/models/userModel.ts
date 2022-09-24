@@ -8,5 +8,4 @@ export class User implements IUser {
     city!: string
     state!: string
     password!: string
-
 }

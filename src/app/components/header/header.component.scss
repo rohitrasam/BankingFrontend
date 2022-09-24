@@ -65,9 +65,13 @@ $glow: rgb(63, 183, 20);
         
         .main-container{
             @include text-container();
+            display: flex;
             text-align: center;
 
             .main{
+                .bank{
+                    margin-left:-12px;
+                }
                 margin: 0 0 0 155px;
                 font-family: monospace;
                 font-weight: 700;
@@ -86,6 +90,7 @@ $glow: rgb(63, 183, 20);
         display: flex;
         flex-direction: row;
         padding: 1%;
+        font-size: 20px;
         width: 50%;
 
         .dashboard-container{

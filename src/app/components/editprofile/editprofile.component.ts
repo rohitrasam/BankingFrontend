@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/core/interfaces/IUser';
 import { User } from 'src/app/core/models/userModel';
 import { UserService } from 'src/app/core/services/user.service';
+import { faUserPen, faCheckToSlot, faCancel, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-editprofile',
@@ -12,7 +13,11 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./editprofile.component.scss']
 })
 export class EditprofileComponent implements OnInit {
-
+  isEdit!: boolean
+  createIcon = faCirclePlus
+  updateIcon = faCheckToSlot
+  cancelIcon = faCancel
+  editIcon = faUserPen
   user!: IUser
   userSubscription!: Subscription
 
@@ -25,28 +30,50 @@ export class EditprofileComponent implements OnInit {
     private route: Router
   ) { }
 
-  ngOnInit(): void {
-    this.getUserDetails()
-    const emailPattern = "^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
-    this.updateForm = this.formBuilder.group({
-      name: ["", Validators.required],
-      email: ["", Validators.required],
-      ph_no: ["", Validators.required],
-      city: ["", Validators.required],
-      state: ["", Validators.required],
-      newPassword: [""],
-      confirmPassword: [""]
-
+  populateField(){
+    this.updateForm.patchValue({
+      name: this.user?.name,
+      email: this.user?.email,
+      ph_no: this.user?.ph_no,
+      city: this.user?.city,
+      state: this.user?.state,
     })
+
   }
 
+  ngOnInit(): void {
+    this.checkEditMode()  
+    if (this.isEdit) {
+      this.getUserDetails()
+    }
 
-  checkPassword = () => this.updateForm.value.newPassword === this.updateForm.value.confirmPassword 
+      this.updateForm = this.formBuilder.group({
+          name: ["", Validators.required],
+          email: ["", Validators.required],
+          ph_no: ["", Validators.required],
+          city: ["", Validators.required],
+          state: ["", Validators.required],
+          newPassword: ["", this.isEdit ? null : Validators.required ],
+          confirmPassword: ["", this.isEdit ? null : Validators.required ]
+        }) 
+  }
+
+  checkEditMode() {
+    if(this.route.url === '/editprofile'){
+      this.isEdit = true
+    }
+    else{
+      this.isEdit = false
+    }
+  }
+
+  checkPassword = (password: string, confirmPassword: string) => password === confirmPassword 
 
   onSubmit() {
+    const password = this.updateForm.value.newPassword
+    const confirmPassword = this.updateForm.value.confirmPassword
 
-    if (this.checkPassword()) {
-      
+    if(this.isEdit && this.checkPassword(password, confirmPassword)) {
       this.user.password = this.updateForm.value.newPassword
       this.userService.updateUser(this.user).subscribe(data => {
         alert(data)
@@ -54,24 +81,46 @@ export class EditprofileComponent implements OnInit {
       }, err => {
         alert(err.error)
       })
-    } 
+    }
+    else if(!this.isEdit && this.checkPassword(password, confirmPassword)){
+      
+      const user = new User()
+      user.name = this.updateForm.value.name
+      user.email = this.updateForm.value.email
+      user.ph_no = this.updateForm.value.ph_no
+      user.city = this.updateForm.value.city
+      user.state = this.updateForm.value.state
+      user.password = this.updateForm.value.newPassword
+
+      this.userService.createUser(user).subscribe(data => {
+        alert(data)
+        this.route.navigate(['login'])
+      }, err => {
+        alert(err.error)
+      })
+    }
     else{
       alert("Passwords don't match")
     }
-    
   }
 
   getUserDetails(){
     this.userSubscription = this.userService.getUser(Number(localStorage.getItem('data'))).subscribe(data => {
       this.user = data;
+      this.populateField()
     })
   }
 
   goToDashboard() {
-    this.route.navigate(['dashboard'])
+    if(this.isEdit){
+      this.route.navigate(['dashboard'])
+    }
+    else{
+      this.route.navigate(['login'])
+    }
   }
 
   ngOnDestroy(): void{
-    this.userSubscription.unsubscribe()
+    if(this.isEdit) this.userSubscription.unsubscribe()
   }
 }

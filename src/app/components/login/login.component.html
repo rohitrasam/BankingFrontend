@@ -2,26 +2,40 @@
 
     <div class="main-container">
         <div class="login-container">
-            <h2 class="login">Main name</h2>
+            <h2 class="login">Main name
+                <fa-icon class="bank" [icon]="bank"></fa-icon>
+            </h2>
         </div>
         
         <div class="form-container">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <mat-form-field>
-                    <mat-label>Email</mat-label>
+                    <mat-label>
+                        <fa-icon [icon]="emailIcon"></fa-icon>
+                        Email
+                    </mat-label>
                     <input matInput formControlName="email" type="email"/>
                 </mat-form-field>
                 <mat-form-field >
-                    <mat-label>Password</mat-label>
+                    <mat-label>
+                        <fa-icon [icon]="passwordIcon"></fa-icon>
+                        Password
+                    </mat-label>
                     <input matInput formControlName=password type="password"/>
                 </mat-form-field>
         
                 <div class="button-container">
                     <div class="login-button-container">
-                        <button class="login-button" mat-raised-button type="submit">Login</button>
+                        <button class="login-button" mat-raised-button type="submit">
+                            Login
+                            <fa-icon [icon]="loginIcon"></fa-icon>
+                        </button>
                     </div>
                     <div class="register-button-container">
-                        <button class="register-button" mat-raised-button (click)="goToRegister()" type="button">Register</button>
+                        <button class="register-button" mat-raised-button (click)="goToRegister()" type="button">
+                            Register
+                            <fa-icon [icon]="registerIcon"></fa-icon>
+                        </button>
                     </div>
                 </div>
                 

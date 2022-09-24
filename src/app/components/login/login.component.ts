@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IUser } from 'src/app/core/interfaces/IUser';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { faBank, faArrowRightToBracket, faIdCard, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,11 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
+  loginIcon = faArrowRightToBracket
+  registerIcon = faIdCard
+  emailIcon = faEnvelope
+  passwordIcon = faKey
+  bank = faBank
   loginForm!: FormGroup
   id!: Number
 
@@ -43,8 +48,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    let email = this.loginForm.value.email
-    let password = this.loginForm.value.password
+    const email = this.loginForm.value.email
+    const password = this.loginForm.value.password
     this.loginService.userLogin({'email': email, 'password': password}).subscribe(data => {      
       localStorage.setItem('data', String(data.id))
       this.authService.setToken(""+Math.random() * 1000 + 987987)

@@ -5,11 +5,14 @@ import { AccountsComponent } from './components/accounts/accounts.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: LoginComponent
+  },
+  {
+    path: 'login',
     component: LoginComponent
   },
   {
@@ -29,8 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent,
-
+    component: EditprofileComponent,
   },
 ];
 

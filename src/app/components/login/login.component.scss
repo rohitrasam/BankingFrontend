@@ -10,10 +10,11 @@
     &:hover{
         color: $textColor;
         background-color:$onHover;
-        box-shadow: 0 0 25px $onHover;
+        box-shadow: 0 0 15px $onHover;
     }
 }
 $boxShadow: whitesmoke;
+
 
 body {
     display: flex;
@@ -21,29 +22,37 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgb(28, 34, 44);
-
+    
     .main-container{
         width: 30%;
         padding: 45px;
         border-radius: 10px;
         border: 2px solid gainsboro;
-
+        
         &:hover{
-            transform: translateY(-3px);
+            transform: translateY(-10px);
+            transition: 0.9s;
             box-shadow: 10px 10px 10px $boxShadow, 
             10px 10px 10px $boxShadow, 
             10px 10px 10px $boxShadow, 
             10px 10px 10px $boxShadow, 
-            ;
         }
     }
 
     .login-container{
+        display: flex;
+        flex-direction: row;
         .login{
             font-size: 40px;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
             color:crimson;
         }
+
+        // .bank{
+        //     margin-left: 20px;
+        //     font-size: 30px;
+        //     color: crimson;
+        // }
     }
 
     .form-container{

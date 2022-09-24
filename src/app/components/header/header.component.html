@@ -2,12 +2,16 @@
     <div class="right-container">
 
         <div class="logout-container">
-            <button mat-raised-button class="logout" (click)="logout()">Logout</button>
+            <button mat-raised-button class="logout" (click)="logout()">
+                Logout
+                <fa-icon [icon]="logoutIcon"></fa-icon>
+            </button>
         </div>
         
         <div class='name-container'>
             <h2 (click)="goToEditProfile()" class="name">
                 {{userName}}
+                <fa-icon  [icon]="userIcon"></fa-icon>
             </h2>
         </div>
     </div>
@@ -16,6 +20,7 @@
         <div class="main-container">
             <h1 class="main">
                 Main name
+                <fa-icon class="bank" [icon]="bankIcon"></fa-icon>
             </h1>
         </div>
     </div>
@@ -24,16 +29,19 @@
         <div class="dashboard-container">
             <button [ngClass]="isDashboardActive ? 'dashboardActive' : ''"  mat-raised-button (click)="goToDashboard()" class="dashboard">
                 Dashboard
+                <fa-icon [icon]="dashboardIcon"></fa-icon>
             </button>
         </div>
         <div class="accounts-container">
             <button [ngClass]="isAccountsActive ? 'accountsActive' : ''" mat-raised-button (click)="goToAccounts()" class="accounts">
                 Accounts
+                <fa-icon [icon]="accountsIcon"></fa-icon>
             </button >
         </div>
         <div class="transfers-container">
             <button mat-raised-button class="transfers">
                 Transfers
+                <fa-icon [icon]="transferIcon"></fa-icon>
             </button>
         </div>
     </div>
